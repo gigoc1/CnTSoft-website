@@ -1,171 +1,727 @@
-<!DOCTYPE HTML>
-<!--
-	Alpha by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>CnTSoft -- Connect Innovator</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="landing is-preload">
-		<div id="page-wrapper">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CnTSoft – BTL Recognized RBTO</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #05080f;
+      --surface:   #0c1220;
+      --border:    #1a2540;
+      --accent:    #00d4ff;
+      --accent2:   #0075ff;
+      --text:      #e8edf5;
+      --muted:     #6b7fa3;
+      --success:   #00e5a0;
+      --mono:      'Space Mono', monospace;
+      --sans:      'DM Sans', sans-serif;
+    }
 
-			<!-- Header -->
-				<header id="header" class="alt">
-					<h1><a href="index.html">CnTSoft</a> by HTML5 UP</h1>
-					<nav id="nav">
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li>
-								<a href="#" class="icon solid fa-angle-down">Layouts</a>
-								<ul>
-									<li><a href="generic.html">Generic</a></li>
-									<li><a href="contact.html">Contact</a></li>
-									<li><a href="elements.html">Elements</a></li>
-									<li>
-										<a href="#">Submenu</a>
-										<ul>
-											<li><a href="#">Option One</a></li>
-											<li><a href="#">Option Two</a></li>
-											<li><a href="#">Option Three</a></li>
-											<li><a href="#">Option Four</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="#" class="button">Sign Up</a></li>
-						</ul>
-					</nav>
-				</header>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-			<!-- Banner -->
-				<section id="banner">
-					<h2>CntSoft</h2>
-					<p>smart city connected by technology</p>
-					<ul class="actions special">
-						<li><a href="#" class="button primary">Sign Up</a></li>
-						<li><a href="#" class="button">Learn More</a></li>
-					</ul>
-				</section>
+    html { scroll-behavior: smooth; }
 
-			<!-- Main -->
-				<section id="main" class="container">
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-					<section class="box special">
-						<header class="major">
-							<h2>Introducing the ultimate mobile app
-							<br />
-							for doing stuff with your phone</h2>
-							<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc ornare<br />
-							adipiscing nunc adipiscing. Condimentum turpis massa.</p>
-						</header>
-						<span class="image featured"><img src="images/pic01.jpg" alt="" /></span>
-					</section>
+    /* ── GRID NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-					<section class="box special features">
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="features-row">
-							<section>
-								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-							<section>
-								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</section>
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(5,8,15,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-					<div class="row">
-						<div class="col-6 col-12-narrower">
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--text); }
 
-							<section class="box special">
-								<span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
-								<h3>Sed lorem adipiscing</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .875rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
-						</div>
-						<div class="col-6 col-12-narrower">
+    .nav-cta {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 8px 20px;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: .8rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--accent); color: var(--bg); }
 
-							<section class="box special">
-								<span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
-								<h3>Accumsan integer</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-								<ul class="actions special">
-									<li><a href="#" class="button alt">Learn More</a></li>
-								</ul>
-							</section>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 140px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
 
-						</div>
-					</div>
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,117,255,.18) 0%, transparent 70%);
+      top: 10%; right: -100px;
+      pointer-events: none;
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,212,255,.10) 0%, transparent 70%);
+      bottom: 5%; left: 20%;
+      pointer-events: none;
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+    @keyframes pulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
 
-				</section>
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,229,160,.08);
+      border: 1px solid rgba(0,229,160,.3);
+      color: var(--success);
+      font-family: var(--mono);
+      font-size: .75rem;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: .06em;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-			<!-- CTA -->
-				<section id="cta">
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      max-width: 800px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-					<h2>Sign up for beta access</h2>
-					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 560px;
+      font-weight: 300;
+      animation: fadeUp .7s .2s ease both;
+    }
 
-					<form>
-						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
-							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
-							</div>
-						</div>
-					</form>
+    .hero-actions {
+      display: flex; gap: 16px; margin-top: 40px;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-2px); }
 
-				</section>
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: .95rem;
+      font-weight: 400;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-			<!-- Footer -->
-				<footer id="footer">
-					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon brands fa-google-plus"><span class="label">Google+</span></a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</footer>
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 64px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .stat { }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-top: 4px;
+    }
 
-		</div>
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+    /* ── SECTION COMMON ── */
+    section { position: relative; z-index: 1; }
 
-	</body>
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+    }
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin-top: 14px;
+      font-weight: 300;
+    }
+
+    /* ── BTL BADGE STRIP ── */
+    .btl-strip {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .btl-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 32px;
+    }
+    .btl-text {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .btl-icon {
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: .85rem; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .btl-desc strong { display: block; font-size: 1rem; font-weight: 600; }
+    .btl-desc span { font-size: .875rem; color: var(--muted); }
+
+    .btl-tags { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btl-tag {
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--muted);
+      letter-spacing: .04em;
+    }
+    .btl-tag.active { border-color: var(--success); color: var(--success); }
+
+    /* ── SERVICES ── */
+    .services { padding: 100px 0; }
+    .services-header { margin-bottom: 60px; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .service-card {
+      background: var(--surface);
+      padding: 40px 36px;
+      transition: background .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
+    }
+    .service-card:hover { background: #0f1828; }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-num {
+      font-family: var(--mono);
+      font-size: .7rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      margin-bottom: 20px;
+    }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .service-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .service-desc {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── WHY CNTSOFT ── */
+    .why { padding: 100px 0; background: var(--surface); }
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-list { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+    .why-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .why-check {
+      width: 24px; height: 24px;
+      background: rgba(0,229,160,.1);
+      border: 1px solid rgba(0,229,160,.3);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: .75rem;
+      color: var(--success);
+      margin-top: 2px;
+    }
+    .why-item-text strong { display: block; font-size: .95rem; font-weight: 600; margin-bottom: 3px; }
+    .why-item-text span { font-size: .85rem; color: var(--muted); }
+
+    .why-visual {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      font-family: var(--mono);
+      font-size: .8rem;
+    }
+    .terminal-bar {
+      display: flex; gap: 6px; margin-bottom: 28px;
+    }
+    .dot { width:10px;height:10px;border-radius:50%; }
+    .dot.r{background:#ff5f57} .dot.y{background:#ffbd2e} .dot.g{background:#28c840}
+
+    .terminal-line { color: var(--muted); line-height: 2; }
+    .terminal-line .cmd { color: var(--accent); }
+    .terminal-line .ok  { color: var(--success); }
+    .terminal-line .val { color: #ffd580; }
+
+    /* ── PROCESS ── */
+    .process { padding: 100px 0; }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 60px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
+    }
+    .step { padding: 0 20px; text-align: center; }
+    .step-circle {
+      width: 56px; height: 56px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-family: var(--mono);
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--accent);
+      position: relative; z-index: 1;
+      transition: border-color .3s, background .3s;
+    }
+    .step:hover .step-circle { border-color: var(--accent); background: rgba(0,212,255,.08); }
+    .step-title { font-size: .95rem; font-weight: 600; margin-bottom: 8px; }
+    .step-desc { font-size: .8rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 100px 0 120px;
+      background: var(--surface);
+      text-align: center;
+    }
+    .contact .section-desc { margin: 14px auto 0; }
+    .contact-form {
+      margin-top: 48px;
+      max-width: 480px;
+      margin-left: auto; margin-right: auto;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .form-row { display: flex; gap: 14px; }
+    .form-input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 13px 18px;
+      border-radius: 8px;
+      font-family: var(--sans);
+      font-size: .9rem;
+      transition: border-color .2s;
+      outline: none;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--accent); }
+    textarea.form-input { resize: vertical; min-height: 110px; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .footer-copy { font-size: .8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: .8rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 120px 24px 60px; }
+      .hero-stats { gap: 28px; flex-wrap: wrap; }
+      .container { padding: 0 24px; }
+      .why-inner { grid-template-columns: 1fr; gap: 40px; }
+      .why-visual { display: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps::before { display: none; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">CnT<span>Soft</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">문의하기</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div style="position:relative;z-index:1;width:100%">
+      <div class="hero-badge">BTL Recognized RBTO &nbsp;·&nbsp; BACnet Testing Laboratory</div>
+      <h1>BACnet 시험의<br><em>글로벌 기준</em>을<br>제시합니다</h1>
+      <p class="hero-sub">
+        CnTSoft는 BACnet Testing Laboratories(BTL)로부터 공인된 RBTO(Recognized BACnet Testing Organization)로서, 신뢰할 수 있는 BACnet 적합성 시험 서비스를 제공합니다.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">서비스 알아보기</a>
+        <a href="#contact" class="btn-outline">시험 문의</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">BTL</div>
+          <div class="stat-label">Recognized RBTO</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100+</div>
+          <div class="stat-label">시험 완료 프로젝트</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">기술 지원</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BTL STRIP -->
+  <div class="btl-strip">
+    <div class="container">
+      <div class="btl-inner">
+        <div class="btl-text">
+          <div class="btl-icon">BTL</div>
+          <div class="btl-desc">
+            <strong>BACnet Testing Laboratories 공인 기관</strong>
+            <span>CnTSoft는 ASHRAE BACnet 표준 위원회가 감독하는 BTL로부터 공인된 RBTO입니다.</span>
+          </div>
+        </div>
+        <div class="btl-tags">
+          <span class="btl-tag active">✓ RBTO 인증</span>
+          <span class="btl-tag">ASHRAE 135</span>
+          <span class="btl-tag">ISO 16484-5</span>
+          <span class="btl-tag">BACnet/IP</span>
+          <span class="btl-tag">MS/TP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header">
+        <p class="section-label">// 서비스</p>
+        <h2 class="section-title">포괄적인<br>BACnet 시험 서비스</h2>
+        <p class="section-desc">RBTO 자격을 보유한 전문 엔지니어가 BACnet 장치의 적합성 및 상호운용성을 검증합니다.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <span class="service-icon">🔬</span>
+          <div class="service-title">BTL 적합성 시험</div>
+          <div class="service-desc">BACnet 장치가 ASHRAE 135 표준을 준수하는지 공인된 절차에 따라 엄밀히 검증합니다. BTL 마크 취득을 목표로 지원합니다.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <span class="service-icon">🔄</span>
+          <div class="service-title">상호운용성 시험</div>
+          <div class="service-desc">다양한 제조사의 BACnet 장치 간 실제 환경에서의 통신 호환성을 검증하여 시스템 통합 리스크를 최소화합니다.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <span class="service-icon">📋</span>
+          <div class="service-title">PICS 문서 검토</div>
+          <div class="service-desc">Protocol Implementation Conformance Statement 작성 및 검토 서비스. 표준 요건에 맞는 정확한 PICS 문서를 작성하도록 지원합니다.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <span class="service-icon">🛠️</span>
+          <div class="service-title">사전 적합성 점검</div>
+          <div class="service-desc">공식 BTL 시험 전 예비 점검을 통해 문제를 사전에 발견하고 수정하여 최종 시험 합격률을 높입니다.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <span class="service-icon">🏗️</span>
+          <div class="service-title">BACnet 구현 컨설팅</div>
+          <div class="service-desc">BACnet 스택 구현 과정에서의 기술 자문. 설계 단계부터 출시까지 전 주기에 걸쳐 전문가 지원을 제공합니다.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <span class="service-icon">📊</span>
+          <div class="service-title">시험 결과 보고서</div>
+          <div class="service-desc">국제 표준에 부합하는 상세 시험 보고서를 제공합니다. 규제 기관 제출 및 고객사 제출용 문서를 작성합니다.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="why-inner">
+        <div>
+          <p class="section-label">// 왜 CnTSoft인가</p>
+          <h2 class="section-title">전문성과 공신력,<br>두 가지를 모두</h2>
+          <p class="section-desc">BACnet 시험 분야에서 검증된 기술력과 BTL 공인 자격을 바탕으로 최고의 결과를 보장합니다.</p>
+          <div class="why-list">
+            <div class="why-item">
+              <div class="why-check">✓</div>
+              <div class="why-item-text">
+                <strong>BTL 공인 RBTO</strong>
+                <span>BACnet Testing Laboratories가 인정한 공식 시험 기관으로, 시험 결과의 국제적 신뢰성을 보장합니다.</span>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-check">✓</div>
+              <div class="why-item-text">
+                <strong>풍부한 시험 경험</strong>
+                <span>다양한 BACnet 장치와 시스템 유형에 대한 광범위한 시험 경험을 보유하고 있습니다.</span>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-check">✓</div>
+              <div class="why-item-text">
+                <strong>신속한 처리 시간</strong>
+                <span>체계적인 시험 프로세스로 경쟁력 있는 납기를 제공하여 제품 출시 일정을 지원합니다.</span>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-check">✓</div>
+              <div class="why-item-text">
+                <strong>전담 기술 지원</strong>
+                <span>시험 전 과정에서 전담 엔지니어가 밀착 지원하여 원활한 시험 진행을 보장합니다.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-visual">
+          <div class="terminal-bar">
+            <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          </div>
+          <div class="terminal-line"><span class="cmd">$ bacnet-test</span> --device=AHU-Controller</div>
+          <div class="terminal-line">&nbsp;&nbsp;Initiating BTL conformance suite...</div>
+          <div class="terminal-line">&nbsp;</div>
+          <div class="terminal-line"><span class="ok">✓</span> Object: AnalogInput &nbsp;&nbsp;&nbsp;<span class="val">PASS</span></div>
+          <div class="terminal-line"><span class="ok">✓</span> Object: AnalogOutput &nbsp;&nbsp;<span class="val">PASS</span></div>
+          <div class="terminal-line"><span class="ok">✓</span> Object: BinaryInput &nbsp;&nbsp;&nbsp;<span class="val">PASS</span></div>
+          <div class="terminal-line"><span class="ok">✓</span> Services: ReadProperty <span class="val">PASS</span></div>
+          <div class="terminal-line"><span class="ok">✓</span> Services: COV &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="val">PASS</span></div>
+          <div class="terminal-line"><span class="ok">✓</span> Network: BACnet/IP &nbsp;&nbsp;&nbsp;<span class="val">PASS</span></div>
+          <div class="terminal-line">&nbsp;</div>
+          <div class="terminal-line"><span class="ok">✓ CONFORMANCE VERIFIED</span> — BTL Ready</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <p class="section-label">// 시험 절차</p>
+      <h2 class="section-title">4단계 시험 프로세스</h2>
+      <p class="section-desc">체계적이고 투명한 시험 절차로 신뢰할 수 있는 결과를 제공합니다.</p>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-circle">01</div>
+          <div class="step-title">초기 상담</div>
+          <div class="step-desc">시험 대상 장치 사양 검토 및 시험 범위, 일정, 비용에 대한 상세 협의</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">02</div>
+          <div class="step-title">PICS 검토</div>
+          <div class="step-desc">제출된 PICS 문서 분석 및 표준 요건과의 일치 여부 사전 점검</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">03</div>
+          <div class="step-title">시험 수행</div>
+          <div class="step-desc">BTL 공인 절차에 따른 적합성 및 상호운용성 시험 수행 및 문제 피드백</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">04</div>
+          <div class="step-title">보고서 발행</div>
+          <div class="step-desc">공식 시험 결과 보고서 작성 및 BTL 등록 지원, 합격 인증서 발급</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="section-label">// 문의하기</p>
+      <h2 class="section-title">프로젝트를 시작할 준비가<br>되셨나요?</h2>
+      <p class="section-desc">BACnet 시험에 대해 궁금한 점이 있으시면 언제든지 문의해 주세요. 전문 엔지니어가 신속히 답변 드립니다.</p>
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="성함" />
+          <input type="text" class="form-input" placeholder="회사명" />
+        </div>
+        <input type="email" class="form-input" placeholder="이메일 주소" />
+        <input type="text" class="form-input" placeholder="시험 대상 장치 / 문의 유형" />
+        <textarea class="form-input" placeholder="문의 내용을 입력해 주세요..."></textarea>
+        <button class="btn-primary" style="width:100%;padding:16px;font-size:1rem;">문의 보내기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">CnTSoft</div>
+    <div class="footer-copy">© 2025 CnTSoft. BTL Recognized RBTO. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">개인정보처리방침</a>
+      <a href="#">이용약관</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+</body>
 </html>
