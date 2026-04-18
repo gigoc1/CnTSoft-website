@@ -7,22 +7,19 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg:        #05080f;
-      --surface:   #0c1220;
-      --border:    #1a2540;
-      --accent:    #00d4ff;
-      --accent2:   #0075ff;
-      --text:      #e8edf5;
-      --muted:     #6b7fa3;
-      --success:   #00e5a0;
-      --mono:      'Space Mono', monospace;
-      --sans:      'DM Sans', sans-serif;
+      --bg:      #05080f;
+      --surface: #0c1220;
+      --border:  #1a2540;
+      --accent:  #00d4ff;
+      --accent2: #0075ff;
+      --text:    #e8edf5;
+      --muted:   #6b7fa3;
+      --success: #00e5a0;
+      --mono:    'Space Mono', monospace;
+      --sans:    'DM Sans', sans-serif;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -31,8 +28,6 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    /* ── GRID NOISE OVERLAY ── */
     body::before {
       content: '';
       position: fixed; inset: 0;
@@ -44,411 +39,226 @@
       z-index: 0;
     }
 
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex; align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 3px; gap: 2px;
+    }
+    .lang-btn {
+      padding: 5px 14px; border-radius: 100px; border: none;
+      background: transparent; color: var(--muted);
+      font-family: var(--mono); font-size: .72rem; font-weight: 700;
+      letter-spacing: .06em; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #fff;
+    }
+    .lang-btn:not(.active):hover { color: var(--text); }
+
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(5,8,15,.85);
-      backdrop-filter: blur(12px);
+      padding: 16px 48px;
+      background: rgba(5,8,15,.88);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: -.02em;
-      text-decoration: none;
+      font-family: var(--mono); font-size: 1.2rem; font-weight: 700;
+      color: var(--accent); letter-spacing: -.02em; text-decoration: none;
     }
     .nav-logo span { color: var(--text); }
-
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: .875rem;
-      font-weight: 400;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+    .nav-center { display: flex; gap: 32px; list-style: none; }
+    .nav-center a {
+      color: var(--muted); text-decoration: none; font-size: .85rem;
+      font-weight: 400; letter-spacing: .04em; text-transform: uppercase;
       transition: color .2s;
     }
-    .nav-links a:hover { color: var(--accent); }
-
+    .nav-center a:hover { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
     .nav-cta {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 8px 20px;
-      border-radius: 4px;
-      font-family: var(--mono);
-      font-size: .8rem;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-      text-decoration: none;
+      background: transparent; border: 1px solid var(--accent);
+      color: var(--accent); padding: 7px 18px; border-radius: 4px;
+      font-family: var(--mono); font-size: .75rem; cursor: pointer;
+      transition: background .2s, color .2s; text-decoration: none; white-space: nowrap;
     }
     .nav-cta:hover { background: var(--accent); color: var(--bg); }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
+      min-height: 100vh; display: flex; flex-direction: column;
       justify-content: center; align-items: flex-start;
-      padding: 140px 48px 80px;
-      position: relative;
-      overflow: hidden;
+      padding: 140px 48px 80px; position: relative; overflow: hidden;
     }
-
     .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
+      position: absolute; width: 600px; height: 600px;
       background: radial-gradient(circle, rgba(0,117,255,.18) 0%, transparent 70%);
-      top: 10%; right: -100px;
-      pointer-events: none;
+      top: 10%; right: -100px; pointer-events: none;
       animation: pulse 6s ease-in-out infinite;
     }
     .hero-glow2 {
-      position: absolute;
-      width: 400px; height: 400px;
+      position: absolute; width: 400px; height: 400px;
       background: radial-gradient(circle, rgba(0,212,255,.10) 0%, transparent 70%);
-      bottom: 5%; left: 20%;
-      pointer-events: none;
+      bottom: 5%; left: 20%; pointer-events: none;
       animation: pulse 8s ease-in-out infinite reverse;
     }
     @keyframes pulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.1)} }
-
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,229,160,.08);
-      border: 1px solid rgba(0,229,160,.3);
-      color: var(--success);
-      font-family: var(--mono);
-      font-size: .75rem;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 28px;
-      letter-spacing: .06em;
-      animation: fadeUp .6s ease both;
+      background: rgba(0,229,160,.08); border: 1px solid rgba(0,229,160,.3);
+      color: var(--success); font-family: var(--mono); font-size: .75rem;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 28px;
+      letter-spacing: .06em; animation: fadeUp .6s ease both;
     }
     .hero-badge::before {
-      content: '';
-      width: 7px; height: 7px;
-      background: var(--success);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--success);
+      content: ''; width: 7px; height: 7px; background: var(--success);
+      border-radius: 50%; box-shadow: 0 0 8px var(--success);
       animation: blink 1.5s ease-in-out infinite;
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-
     .hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -.03em;
-      max-width: 800px;
+      font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 700;
+      line-height: 1.05; letter-spacing: -.03em; max-width: 820px;
       animation: fadeUp .7s .1s ease both;
     }
     .hero h1 em {
       font-style: normal;
       background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     .hero-sub {
-      margin-top: 24px;
-      font-size: 1.125rem;
-      color: var(--muted);
-      max-width: 560px;
-      font-weight: 300;
-      animation: fadeUp .7s .2s ease both;
+      margin-top: 24px; font-size: 1.1rem; color: var(--muted);
+      max-width: 580px; font-weight: 300; animation: fadeUp .7s .2s ease both;
     }
-
-    .hero-actions {
-      display: flex; gap: 16px; margin-top: 40px;
-      animation: fadeUp .7s .3s ease both;
-    }
+    .hero-actions { display: flex; gap: 16px; margin-top: 40px; animation: fadeUp .7s .3s ease both; }
     .btn-primary {
       background: linear-gradient(135deg, var(--accent2), var(--accent));
-      color: #fff;
-      border: none;
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-family: var(--sans);
-      font-size: .95rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity .2s, transform .2s;
-      display: inline-block;
+      color: #fff; border: none; padding: 13px 30px; border-radius: 6px;
+      font-family: var(--sans); font-size: .95rem; font-weight: 600;
+      cursor: pointer; text-decoration: none; transition: opacity .2s, transform .2s; display: inline-block;
     }
     .btn-primary:hover { opacity: .88; transform: translateY(-2px); }
-
     .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 14px 32px;
-      border-radius: 6px;
-      font-family: var(--sans);
-      font-size: .95rem;
-      font-weight: 400;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color .2s, color .2s;
-      display: inline-block;
+      background: transparent; color: var(--text); border: 1px solid var(--border);
+      padding: 13px 30px; border-radius: 6px; font-family: var(--sans); font-size: .95rem;
+      cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s; display: inline-block;
     }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    .hero-stats {
-      display: flex; gap: 48px; margin-top: 64px;
-      animation: fadeUp .7s .4s ease both;
-    }
-    .stat { }
-    .stat-num {
-      font-family: var(--mono);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: .8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      margin-top: 4px;
-    }
-
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; animation: fadeUp .7s .4s ease both; }
+    .stat-num { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .stat-label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── SECTION COMMON ── */
+    /* ── COMMON ── */
     section { position: relative; z-index: 1; }
-
     .container { max-width: 1140px; margin: 0 auto; padding: 0 48px; }
+    .section-label { font-family: var(--mono); font-size: .75rem; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.75rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
+    .section-desc { color: var(--muted); font-size: 1rem; max-width: 520px; margin-top: 14px; font-weight: 300; }
 
-    .section-label {
-      font-family: var(--mono);
-      font-size: .75rem;
-      color: var(--accent);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -.02em;
-      line-height: 1.15;
-    }
-    .section-desc {
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 520px;
-      margin-top: 14px;
-      font-weight: 300;
-    }
-
-    /* ── BTL BADGE STRIP ── */
-    .btl-strip {
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .btl-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 32px;
-    }
-    .btl-text {
-      display: flex; align-items: center; gap: 20px;
-    }
+    /* ── BTL STRIP ── */
+    .btl-strip { padding: 44px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .btl-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 28px; }
+    .btl-text { display: flex; align-items: center; gap: 18px; }
     .btl-icon {
-      width: 56px; height: 56px;
+      width: 54px; height: 54px;
       background: linear-gradient(135deg, var(--accent2), var(--accent));
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono); font-size: .85rem; font-weight: 700; color: #fff;
-      flex-shrink: 0;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: .82rem; font-weight: 700; color: #fff; flex-shrink: 0;
     }
-    .btl-desc strong { display: block; font-size: 1rem; font-weight: 600; }
-    .btl-desc span { font-size: .875rem; color: var(--muted); }
-
-    .btl-tags { display: flex; gap: 12px; flex-wrap: wrap; }
-    .btl-tag {
-      border: 1px solid var(--border);
-      padding: 8px 18px;
-      border-radius: 100px;
-      font-family: var(--mono);
-      font-size: .75rem;
-      color: var(--muted);
-      letter-spacing: .04em;
-    }
+    .btl-desc strong { display: block; font-size: .95rem; font-weight: 600; }
+    .btl-desc span { font-size: .85rem; color: var(--muted); }
+    .btl-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btl-tag { border: 1px solid var(--border); padding: 7px 16px; border-radius: 100px; font-family: var(--mono); font-size: .72rem; color: var(--muted); }
     .btl-tag.active { border-color: var(--success); color: var(--success); }
 
     /* ── SERVICES ── */
-    .services { padding: 100px 0; }
-    .services-header { margin-bottom: 60px; }
-
+    .services { padding: 96px 0; }
+    .services-header { margin-bottom: 56px; }
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px; background: var(--border); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
     }
     .service-card {
-      background: var(--surface);
-      padding: 40px 36px;
-      transition: background .25s;
-      position: relative;
-      overflow: hidden;
+      background: var(--surface); padding: 38px 34px;
+      transition: background .25s; position: relative; overflow: hidden;
     }
     .service-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--accent2), var(--accent));
-      transform: scaleX(0);
-      transition: transform .3s;
-      transform-origin: left;
+      transform: scaleX(0); transition: transform .3s; transform-origin: left;
     }
     .service-card:hover { background: #0f1828; }
     .service-card:hover::after { transform: scaleX(1); }
+    .service-num { font-family: var(--mono); font-size: .7rem; color: var(--accent); letter-spacing: .1em; margin-bottom: 18px; }
+    .service-icon { font-size: 1.9rem; margin-bottom: 14px; display: block; }
+    .service-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+    .service-desc { font-size: .875rem; color: var(--muted); line-height: 1.65; }
 
-    .service-num {
-      font-family: var(--mono);
-      font-size: .7rem;
-      color: var(--accent);
-      letter-spacing: .1em;
-      margin-bottom: 20px;
-    }
-    .service-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-    .service-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-    .service-desc {
-      font-size: .875rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── WHY CNTSOFT ── */
-    .why { padding: 100px 0; background: var(--surface); }
-    .why-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .why-list { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
-    .why-item {
-      display: flex; gap: 16px; align-items: flex-start;
-    }
+    /* ── WHY ── */
+    .why { padding: 96px 0; background: var(--surface); }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-list { margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+    .why-item { display: flex; gap: 14px; align-items: flex-start; }
     .why-check {
-      width: 24px; height: 24px;
-      background: rgba(0,229,160,.1);
-      border: 1px solid rgba(0,229,160,.3);
-      border-radius: 6px;
+      width: 24px; height: 24px; background: rgba(0,229,160,.1);
+      border: 1px solid rgba(0,229,160,.3); border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: .75rem;
-      color: var(--success);
-      margin-top: 2px;
+      flex-shrink: 0; font-size: .72rem; color: var(--success); margin-top: 3px;
     }
-    .why-item-text strong { display: block; font-size: .95rem; font-weight: 600; margin-bottom: 3px; }
-    .why-item-text span { font-size: .85rem; color: var(--muted); }
-
+    .why-item-text strong { display: block; font-size: .93rem; font-weight: 600; margin-bottom: 2px; }
+    .why-item-text span { font-size: .84rem; color: var(--muted); }
     .why-visual {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 40px;
-      font-family: var(--mono);
-      font-size: .8rem;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px; font-family: var(--mono); font-size: .78rem;
     }
-    .terminal-bar {
-      display: flex; gap: 6px; margin-bottom: 28px;
-    }
+    .terminal-bar { display: flex; gap: 6px; margin-bottom: 24px; }
     .dot { width:10px;height:10px;border-radius:50%; }
     .dot.r{background:#ff5f57} .dot.y{background:#ffbd2e} .dot.g{background:#28c840}
-
-    .terminal-line { color: var(--muted); line-height: 2; }
+    .terminal-line { color: var(--muted); line-height: 2.1; }
     .terminal-line .cmd { color: var(--accent); }
     .terminal-line .ok  { color: var(--success); }
     .terminal-line .val { color: #ffd580; }
 
     /* ── PROCESS ── */
-    .process { padding: 100px 0; }
+    .process { padding: 96px 0; }
     .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 60px;
-      position: relative;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+      margin-top: 56px; position: relative;
     }
     .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 28px; left: 10%; right: 10%;
-      height: 1px;
+      content: ''; position: absolute; top: 27px; left: 10%; right: 10%; height: 1px;
       background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent);
     }
-    .step { padding: 0 20px; text-align: center; }
+    .step { padding: 0 18px; text-align: center; }
     .step-circle {
-      width: 56px; height: 56px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 50%;
+      width: 54px; height: 54px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      font-family: var(--mono);
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--accent);
-      position: relative; z-index: 1;
+      margin: 0 auto 18px; font-family: var(--mono); font-size: .88rem;
+      font-weight: 700; color: var(--accent); position: relative; z-index: 1;
       transition: border-color .3s, background .3s;
     }
     .step:hover .step-circle { border-color: var(--accent); background: rgba(0,212,255,.08); }
-    .step-title { font-size: .95rem; font-weight: 600; margin-bottom: 8px; }
+    .step-title { font-size: .93rem; font-weight: 600; margin-bottom: 7px; }
     .step-desc { font-size: .8rem; color: var(--muted); line-height: 1.55; }
 
     /* ── CONTACT ── */
-    .contact {
-      padding: 100px 0 120px;
-      background: var(--surface);
-      text-align: center;
-    }
+    .contact { padding: 96px 0 120px; background: var(--surface); text-align: center; }
     .contact .section-desc { margin: 14px auto 0; }
-    .contact-form {
-      margin-top: 48px;
-      max-width: 480px;
-      margin-left: auto; margin-right: auto;
-      display: flex; flex-direction: column; gap: 14px;
-    }
+    .contact-form { margin: 44px auto 0; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
     .form-row { display: flex; gap: 14px; }
     .form-input {
-      width: 100%;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 13px 18px;
-      border-radius: 8px;
-      font-family: var(--sans);
-      font-size: .9rem;
-      transition: border-color .2s;
-      outline: none;
+      width: 100%; background: var(--bg); border: 1px solid var(--border);
+      color: var(--text); padding: 12px 16px; border-radius: 8px;
+      font-family: var(--sans); font-size: .9rem; transition: border-color .2s; outline: none;
     }
     .form-input::placeholder { color: var(--muted); }
     .form-input:focus { border-color: var(--accent); }
@@ -456,34 +266,29 @@
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 36px 48px;
+      border-top: 1px solid var(--border); padding: 32px 48px;
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px;
+      flex-wrap: wrap; gap: 14px;
     }
-    .footer-logo {
-      font-family: var(--mono);
-      font-size: 1rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-    .footer-copy { font-size: .8rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a { font-size: .8rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .footer-logo { font-family: var(--mono); font-size: .95rem; color: var(--accent); font-weight: 700; }
+    .footer-copy { font-size: .78rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--accent); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 120px 24px 60px; }
-      .hero-stats { gap: 28px; flex-wrap: wrap; }
+      nav { padding: 14px 20px; }
+      .nav-center { display: none; }
+      .hero { padding: 110px 24px 60px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
       .container { padding: 0 24px; }
-      .why-inner { grid-template-columns: 1fr; gap: 40px; }
+      .why-inner { grid-template-columns: 1fr; gap: 36px; }
       .why-visual { display: none; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps { grid-template-columns: 1fr 1fr; gap: 28px; }
       .process-steps::before { display: none; }
       footer { flex-direction: column; align-items: flex-start; padding: 24px; }
+      .form-row { flex-direction: column; }
     }
   </style>
 </head>
@@ -492,13 +297,19 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">CnT<span>Soft</span></a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#why">About</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
+    <ul class="nav-center">
+      <li><a href="#services" data-ko="서비스"   data-en="Services">서비스</a></li>
+      <li><a href="#why"      data-ko="회사소개" data-en="About">회사소개</a></li>
+      <li><a href="#process"  data-ko="시험절차" data-en="Process">시험절차</a></li>
+      <li><a href="#contact"  data-ko="문의"     data-en="Contact">문의</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">문의하기</a>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-ko" onclick="setLang('ko')">KR</button>
+        <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#contact" class="nav-cta" data-ko="문의하기" data-en="Contact Us">문의하기</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -506,27 +317,36 @@
     <div class="hero-glow"></div>
     <div class="hero-glow2"></div>
     <div style="position:relative;z-index:1;width:100%">
-      <div class="hero-badge">BTL Recognized RBTO &nbsp;·&nbsp; BACnet Testing Laboratory</div>
-      <h1>BACnet 시험의<br><em>글로벌 기준</em>을<br>제시합니다</h1>
-      <p class="hero-sub">
+      <div class="hero-badge"
+           data-ko="BTL RBTO(Recognied BACnet Testing Origanization) &nbsp;·&nbsp; BACnet 시험 전문 기관"
+           data-en="BTL RBTO &nbsp;·&nbsp; BACnet Testing Organization">
+        BTL 공인 RBTO &nbsp;·&nbsp; BACnet 시험 전문 기관
+      </div>
+      <h1 data-ko="BACnet 시험의<br><em>글로벌 기준</em>을<br>제시합니다"
+          data-en="Setting the <em>Global Standard</em><br>for BACnet Testing">
+        BACnet 시험의<br><em>글로벌 기준</em>을<br>제시합니다
+      </h1>
+      <p class="hero-sub"
+         data-ko="CnTSoft는 BACnet Testing Laboratories(BTL)로부터 공인된 RBTO(Recognized BACnet Testing Organization)로서, 신뢰할 수 있는 BACnet 적합성 시험 서비스를 제공합니다."
+         data-en="CnTSoft is an RBTO (Recognized BACnet Testing Organization) accredited by BACnet Testing Laboratories (BTL), delivering trusted BACnet conformance testing services worldwide.">
         CnTSoft는 BACnet Testing Laboratories(BTL)로부터 공인된 RBTO(Recognized BACnet Testing Organization)로서, 신뢰할 수 있는 BACnet 적합성 시험 서비스를 제공합니다.
       </p>
       <div class="hero-actions">
-        <a href="#services" class="btn-primary">서비스 알아보기</a>
-        <a href="#contact" class="btn-outline">시험 문의</a>
+        <a href="#services" class="btn-primary" data-ko="서비스 알아보기" data-en="Explore Services">서비스 알아보기</a>
+        <a href="#contact"  class="btn-outline"  data-ko="시험 문의"       data-en="Request Testing">시험 문의</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
           <div class="stat-num">BTL</div>
-          <div class="stat-label">Recognized RBTO</div>
+          <div class="stat-label" data-ko="공인 RBTO" data-en="Recognized RBTO">공인 RBTO</div>
         </div>
         <div class="stat">
           <div class="stat-num">100+</div>
-          <div class="stat-label">시험 완료 프로젝트</div>
+          <div class="stat-label" data-ko="시험 완료 프로젝트" data-en="Tests Completed">시험 완료 프로젝트</div>
         </div>
         <div class="stat">
           <div class="stat-num">24/7</div>
-          <div class="stat-label">기술 지원</div>
+          <div class="stat-label" data-ko="기술 지원" data-en="Technical Support">기술 지원</div>
         </div>
       </div>
     </div>
@@ -539,12 +359,18 @@
         <div class="btl-text">
           <div class="btl-icon">BTL</div>
           <div class="btl-desc">
-            <strong>BACnet Testing Laboratories 공인 기관</strong>
-            <span>CnTSoft는 ASHRAE BACnet 표준 위원회가 감독하는 BTL로부터 공인된 RBTO입니다.</span>
+            <strong data-ko="BACnet Testing Laboratories 공인 기관"
+                    data-en="BACnet Testing Laboratories Accredited">
+              BACnet Testing Laboratories 공인 기관
+            </strong>
+            <span data-ko="CnTSoft는 ASHRAE BACnet 표준 위원회가 감독하는 BTL로부터 공인된 RBTO입니다."
+                  data-en="CnTSoft is an RBTO accredited by BTL, overseen by the ASHRAE BACnet Standards Committee.">
+              CnTSoft는 ASHRAE BACnet 표준 위원회가 감독하는 BTL로부터 공인된 RBTO입니다.
+            </span>
           </div>
         </div>
         <div class="btl-tags">
-          <span class="btl-tag active">✓ RBTO 인증</span>
+          <span class="btl-tag active">✓ RBTO</span>
           <span class="btl-tag">ASHRAE 135</span>
           <span class="btl-tag">ISO 16484-5</span>
           <span class="btl-tag">BACnet/IP</span>
@@ -558,46 +384,78 @@
   <section class="services" id="services">
     <div class="container">
       <div class="services-header">
-        <p class="section-label">// 서비스</p>
-        <h2 class="section-title">포괄적인<br>BACnet 시험 서비스</h2>
-        <p class="section-desc">RBTO 자격을 보유한 전문 엔지니어가 BACnet 장치의 적합성 및 상호운용성을 검증합니다.</p>
+        <p class="section-label" data-ko="// 서비스" data-en="// Services">// 서비스</p>
+        <h2 class="section-title"
+            data-ko="포괄적인<br>BACnet 시험 서비스"
+            data-en="Comprehensive<br>BACnet Testing Services">
+          포괄적인<br>BACnet 시험 서비스
+        </h2>
+        <p class="section-desc"
+           data-ko="RBTO 자격을 보유한 전문 엔지니어가 BACnet 장치의 적합성 및 상호운용성을 검증합니다."
+           data-en="Our BTL-accredited engineers verify the conformance and interoperability of your BACnet devices.">
+          RBTO 자격을 보유한 전문 엔지니어가 BACnet 장치의 적합성 및 상호운용성을 검증합니다.
+        </p>
       </div>
       <div class="services-grid">
         <div class="service-card">
           <div class="service-num">01</div>
           <span class="service-icon">🔬</span>
-          <div class="service-title">BTL 적합성 시험</div>
-          <div class="service-desc">BACnet 장치가 ASHRAE 135 표준을 준수하는지 공인된 절차에 따라 엄밀히 검증합니다. BTL 마크 취득을 목표로 지원합니다.</div>
+          <div class="service-title" data-ko="BTL 적합성 시험" data-en="BTL Conformance Testing">BTL 적합성 시험</div>
+          <div class="service-desc"
+               data-ko="BACnet 장치가 ASHRAE 135 표준을 준수하는지 공인된 절차에 따라 엄밀히 검증합니다. BTL 마크 취득을 목표로 지원합니다."
+               data-en="We rigorously verify that your BACnet device complies with the ASHRAE 135 standard following accredited procedures, guiding you toward BTL mark certification.">
+            BACnet 장치가 ASHRAE 135 표준을 준수하는지 공인된 절차에 따라 엄밀히 검증합니다. BTL 마크 취득을 목표로 지원합니다.
+          </div>
         </div>
         <div class="service-card">
           <div class="service-num">02</div>
           <span class="service-icon">🔄</span>
-          <div class="service-title">상호운용성 시험</div>
-          <div class="service-desc">다양한 제조사의 BACnet 장치 간 실제 환경에서의 통신 호환성을 검증하여 시스템 통합 리스크를 최소화합니다.</div>
+          <div class="service-title" data-ko="상호운용성 시험" data-en="Interoperability Testing">상호운용성 시험</div>
+          <div class="service-desc"
+               data-ko="다양한 제조사의 BACnet 장치 간 실제 환경에서의 통신 호환성을 검증하여 시스템 통합 리스크를 최소화합니다."
+               data-en="We validate real-world communication compatibility between BACnet devices from various vendors, minimizing system integration risks.">
+            다양한 제조사의 BACnet 장치 간 실제 환경에서의 통신 호환성을 검증하여 시스템 통합 리스크를 최소화합니다.
+          </div>
         </div>
         <div class="service-card">
           <div class="service-num">03</div>
           <span class="service-icon">📋</span>
-          <div class="service-title">PICS 문서 검토</div>
-          <div class="service-desc">Protocol Implementation Conformance Statement 작성 및 검토 서비스. 표준 요건에 맞는 정확한 PICS 문서를 작성하도록 지원합니다.</div>
+          <div class="service-title" data-ko="PICS 문서 검토" data-en="PICS Document Review">PICS 문서 검토</div>
+          <div class="service-desc"
+               data-ko="Protocol Implementation Conformance Statement 작성 및 검토 서비스. 표준 요건에 맞는 정확한 PICS 문서를 작성하도록 지원합니다."
+               data-en="We assist in drafting and reviewing your Protocol Implementation Conformance Statement (PICS), ensuring full compliance with standard requirements.">
+            Protocol Implementation Conformance Statement 작성 및 검토 서비스. 표준 요건에 맞는 정확한 PICS 문서를 작성하도록 지원합니다.
+          </div>
         </div>
         <div class="service-card">
           <div class="service-num">04</div>
           <span class="service-icon">🛠️</span>
-          <div class="service-title">사전 적합성 점검</div>
-          <div class="service-desc">공식 BTL 시험 전 예비 점검을 통해 문제를 사전에 발견하고 수정하여 최종 시험 합격률을 높입니다.</div>
+          <div class="service-title" data-ko="사전 적합성 점검" data-en="Pre-Conformance Check">사전 적합성 점검</div>
+          <div class="service-desc"
+               data-ko="공식 BTL 시험 전 예비 점검을 통해 문제를 사전에 발견하고 수정하여 최종 시험 합격률을 높입니다."
+               data-en="A preliminary check before official BTL testing to identify and resolve issues early, significantly improving your final test pass rate.">
+            공식 BTL 시험 전 예비 점검을 통해 문제를 사전에 발견하고 수정하여 최종 시험 합격률을 높입니다.
+          </div>
         </div>
         <div class="service-card">
           <div class="service-num">05</div>
           <span class="service-icon">🏗️</span>
-          <div class="service-title">BACnet 구현 컨설팅</div>
-          <div class="service-desc">BACnet 스택 구현 과정에서의 기술 자문. 설계 단계부터 출시까지 전 주기에 걸쳐 전문가 지원을 제공합니다.</div>
+          <div class="service-title" data-ko="BACnet 구현 컨설팅" data-en="BACnet Implementation Consulting">BACnet 구현 컨설팅</div>
+          <div class="service-desc"
+               data-ko="BACnet 스택 구현 과정에서의 기술 자문. 설계 단계부터 출시까지 전 주기에 걸쳐 전문가 지원을 제공합니다."
+               data-en="Expert technical guidance throughout your BACnet stack implementation — from design through product launch.">
+            BACnet 스택 구현 과정에서의 기술 자문. 설계 단계부터 출시까지 전 주기에 걸쳐 전문가 지원을 제공합니다.
+          </div>
         </div>
         <div class="service-card">
           <div class="service-num">06</div>
           <span class="service-icon">📊</span>
-          <div class="service-title">시험 결과 보고서</div>
-          <div class="service-desc">국제 표준에 부합하는 상세 시험 보고서를 제공합니다. 규제 기관 제출 및 고객사 제출용 문서를 작성합니다.</div>
+          <div class="service-title" data-ko="시험 결과 보고서" data-en="Test Result Reports">시험 결과 보고서</div>
+          <div class="service-desc"
+               data-ko="국제 표준에 부합하는 상세 시험 보고서를 제공합니다. 규제 기관 및 고객사 제출용 문서를 작성합니다."
+               data-en="We provide detailed test reports aligned with international standards, suitable for regulatory submissions and client-facing documentation.">
+            국제 표준에 부합하는 상세 시험 보고서를 제공합니다. 규제 기관 및 고객사 제출용 문서를 작성합니다.
+          </div>
         </div>
       </div>
     </div>
@@ -608,36 +466,56 @@
     <div class="container">
       <div class="why-inner">
         <div>
-          <p class="section-label">// 왜 CnTSoft인가</p>
-          <h2 class="section-title">전문성과 공신력,<br>두 가지를 모두</h2>
-          <p class="section-desc">BACnet 시험 분야에서 검증된 기술력과 BTL 공인 자격을 바탕으로 최고의 결과를 보장합니다.</p>
+          <p class="section-label" data-ko="// 왜 CnTSoft인가" data-en="// Why CnTSoft">// 왜 CnTSoft인가</p>
+          <h2 class="section-title"
+              data-ko="전문성과 공신력,<br>두 가지를 모두"
+              data-en="Expertise and Credibility,<br>All in One Place">
+            전문성과 공신력,<br>두 가지를 모두
+          </h2>
+          <p class="section-desc"
+             data-ko="BACnet 시험 분야에서 검증된 기술력과 BTL 공인 자격을 바탕으로 최고의 결과를 보장합니다."
+             data-en="We combine proven technical expertise with BTL accreditation to deliver the highest-quality testing outcomes.">
+            BACnet 시험 분야에서 검증된 기술력과 BTL 공인 자격을 바탕으로 최고의 결과를 보장합니다.
+          </p>
           <div class="why-list">
             <div class="why-item">
               <div class="why-check">✓</div>
               <div class="why-item-text">
-                <strong>BTL 공인 RBTO</strong>
-                <span>BACnet Testing Laboratories가 인정한 공식 시험 기관으로, 시험 결과의 국제적 신뢰성을 보장합니다.</span>
+                <strong data-ko="BTL 공인 RBTO" data-en="BTL Accredited RBTO">BTL 공인 RBTO</strong>
+                <span data-ko="BACnet Testing Laboratories가 인정한 공식 시험 기관으로, 시험 결과의 국제적 신뢰성을 보장합니다."
+                      data-en="Officially recognized by BACnet Testing Laboratories, guaranteeing internationally trusted test results.">
+                  BACnet Testing Laboratories가 인정한 공식 시험 기관으로, 시험 결과의 국제적 신뢰성을 보장합니다.
+                </span>
               </div>
             </div>
             <div class="why-item">
               <div class="why-check">✓</div>
               <div class="why-item-text">
-                <strong>풍부한 시험 경험</strong>
-                <span>다양한 BACnet 장치와 시스템 유형에 대한 광범위한 시험 경험을 보유하고 있습니다.</span>
+                <strong data-ko="풍부한 시험 경험" data-en="Extensive Testing Experience">풍부한 시험 경험</strong>
+                <span data-ko="다양한 BACnet 장치와 시스템 유형에 대한 광범위한 시험 경험을 보유하고 있습니다."
+                      data-en="We have broad experience testing a wide range of BACnet device types and system configurations.">
+                  다양한 BACnet 장치와 시스템 유형에 대한 광범위한 시험 경험을 보유하고 있습니다.
+                </span>
               </div>
             </div>
             <div class="why-item">
               <div class="why-check">✓</div>
               <div class="why-item-text">
-                <strong>신속한 처리 시간</strong>
-                <span>체계적인 시험 프로세스로 경쟁력 있는 납기를 제공하여 제품 출시 일정을 지원합니다.</span>
+                <strong data-ko="신속한 처리 시간" data-en="Fast Turnaround">신속한 처리 시간</strong>
+                <span data-ko="체계적인 시험 프로세스로 경쟁력 있는 납기를 제공하여 제품 출시 일정을 지원합니다."
+                      data-en="Our structured testing process delivers competitive turnaround times to support your product launch schedule.">
+                  체계적인 시험 프로세스로 경쟁력 있는 납기를 제공하여 제품 출시 일정을 지원합니다.
+                </span>
               </div>
             </div>
             <div class="why-item">
               <div class="why-check">✓</div>
               <div class="why-item-text">
-                <strong>전담 기술 지원</strong>
-                <span>시험 전 과정에서 전담 엔지니어가 밀착 지원하여 원활한 시험 진행을 보장합니다.</span>
+                <strong data-ko="전담 기술 지원" data-en="Dedicated Technical Support">전담 기술 지원</strong>
+                <span data-ko="시험 전 과정에서 전담 엔지니어가 밀착 지원하여 원활한 시험 진행을 보장합니다."
+                      data-en="A dedicated engineer accompanies you through every step of the testing process, ensuring smooth progress.">
+                  시험 전 과정에서 전담 엔지니어가 밀착 지원하여 원활한 시험 진행을 보장합니다.
+                </span>
               </div>
             </div>
           </div>
@@ -665,29 +543,49 @@
   <!-- PROCESS -->
   <section class="process" id="process">
     <div class="container">
-      <p class="section-label">// 시험 절차</p>
-      <h2 class="section-title">4단계 시험 프로세스</h2>
-      <p class="section-desc">체계적이고 투명한 시험 절차로 신뢰할 수 있는 결과를 제공합니다.</p>
+      <p class="section-label" data-ko="// 시험 절차" data-en="// Process">// 시험 절차</p>
+      <h2 class="section-title" data-ko="4단계 시험 프로세스" data-en="4-Step Testing Process">4단계 시험 프로세스</h2>
+      <p class="section-desc"
+         data-ko="체계적이고 투명한 시험 절차로 신뢰할 수 있는 결과를 제공합니다."
+         data-en="Our structured, transparent process delivers reliable, internationally recognized results.">
+        체계적이고 투명한 시험 절차로 신뢰할 수 있는 결과를 제공합니다.
+      </p>
       <div class="process-steps">
         <div class="step">
           <div class="step-circle">01</div>
-          <div class="step-title">초기 상담</div>
-          <div class="step-desc">시험 대상 장치 사양 검토 및 시험 범위, 일정, 비용에 대한 상세 협의</div>
+          <div class="step-title" data-ko="초기 상담" data-en="Consultation">초기 상담</div>
+          <div class="step-desc"
+               data-ko="시험 대상 장치 사양 검토 및 시험 범위, 일정, 비용에 대한 상세 협의"
+               data-en="Review of device specifications and detailed discussion on scope, schedule, and costs">
+            시험 대상 장치 사양 검토 및 시험 범위, 일정, 비용에 대한 상세 협의
+          </div>
         </div>
         <div class="step">
           <div class="step-circle">02</div>
-          <div class="step-title">PICS 검토</div>
-          <div class="step-desc">제출된 PICS 문서 분석 및 표준 요건과의 일치 여부 사전 점검</div>
+          <div class="step-title" data-ko="PICS 검토" data-en="PICS Review">PICS 검토</div>
+          <div class="step-desc"
+               data-ko="제출된 PICS 문서 분석 및 표준 요건과의 일치 여부 사전 점검"
+               data-en="Analysis of submitted PICS documents and pre-verification against standard requirements">
+            제출된 PICS 문서 분석 및 표준 요건과의 일치 여부 사전 점검
+          </div>
         </div>
         <div class="step">
           <div class="step-circle">03</div>
-          <div class="step-title">시험 수행</div>
-          <div class="step-desc">BTL 공인 절차에 따른 적합성 및 상호운용성 시험 수행 및 문제 피드백</div>
+          <div class="step-title" data-ko="시험 수행" data-en="Test Execution">시험 수행</div>
+          <div class="step-desc"
+               data-ko="BTL 공인 절차에 따른 적합성 및 상호운용성 시험 수행 및 문제 피드백"
+               data-en="Execution of conformance and interoperability tests per BTL procedures with issue feedback">
+            BTL 공인 절차에 따른 적합성 및 상호운용성 시험 수행 및 문제 피드백
+          </div>
         </div>
         <div class="step">
           <div class="step-circle">04</div>
-          <div class="step-title">보고서 발행</div>
-          <div class="step-desc">공식 시험 결과 보고서 작성 및 BTL 등록 지원, 합격 인증서 발급</div>
+          <div class="step-title" data-ko="보고서 발행" data-en="Report & Certificate">보고서 발행</div>
+          <div class="step-desc"
+               data-ko="공식 시험 결과 보고서 작성 및 BTL 등록 지원, 합격 인증서 발급"
+               data-en="Official test report issuance, BTL registration support, and certificate delivery">
+            공식 시험 결과 보고서 작성 및 BTL 등록 지원, 합격 인증서 발급
+          </div>
         </div>
       </div>
     </div>
@@ -696,18 +594,36 @@
   <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="container">
-      <p class="section-label">// 문의하기</p>
-      <h2 class="section-title">프로젝트를 시작할 준비가<br>되셨나요?</h2>
-      <p class="section-desc">BACnet 시험에 대해 궁금한 점이 있으시면 언제든지 문의해 주세요. 전문 엔지니어가 신속히 답변 드립니다.</p>
+      <p class="section-label" data-ko="// 문의하기" data-en="// Get in Touch">// 문의하기</p>
+      <h2 class="section-title"
+          data-ko="프로젝트를 시작할 준비가<br>되셨나요?"
+          data-en="Ready to Get<br>Your Device Tested?">
+        프로젝트를 시작할 준비가<br>되셨나요?
+      </h2>
+      <p class="section-desc"
+         data-ko="BACnet 시험에 대해 궁금한 점이 있으시면 언제든지 문의해 주세요. 전문 엔지니어가 신속히 답변 드립니다."
+         data-en="Have questions about BACnet testing? Reach out anytime — our expert engineers will respond promptly.">
+        BACnet 시험에 대해 궁금한 점이 있으시면 언제든지 문의해 주세요. 전문 엔지니어가 신속히 답변 드립니다.
+      </p>
       <div class="contact-form">
         <div class="form-row">
-          <input type="text" class="form-input" placeholder="성함" />
-          <input type="text" class="form-input" placeholder="회사명" />
+          <input type="text" class="form-input"
+                 data-placeholder-ko="성함" data-placeholder-en="Full Name" placeholder="성함" />
+          <input type="text" class="form-input"
+                 data-placeholder-ko="회사명" data-placeholder-en="Company" placeholder="회사명" />
         </div>
-        <input type="email" class="form-input" placeholder="이메일 주소" />
-        <input type="text" class="form-input" placeholder="시험 대상 장치 / 문의 유형" />
-        <textarea class="form-input" placeholder="문의 내용을 입력해 주세요..."></textarea>
-        <button class="btn-primary" style="width:100%;padding:16px;font-size:1rem;">문의 보내기</button>
+        <input type="email" class="form-input"
+               data-placeholder-ko="이메일 주소" data-placeholder-en="Email Address" placeholder="이메일 주소" />
+        <input type="text" class="form-input"
+               data-placeholder-ko="시험 대상 장치 / 문의 유형" data-placeholder-en="Device Under Test / Inquiry Type"
+               placeholder="시험 대상 장치 / 문의 유형" />
+        <textarea class="form-input"
+                  data-placeholder-ko="문의 내용을 입력해 주세요..." data-placeholder-en="Describe your inquiry..."
+                  placeholder="문의 내용을 입력해 주세요..."></textarea>
+        <button class="btn-primary" style="width:100%;padding:16px;font-size:1rem;"
+                data-ko="문의 보내기" data-en="Send Message">
+          문의 보내기
+        </button>
       </div>
     </div>
   </section>
@@ -715,13 +631,79 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">CnTSoft</div>
-    <div class="footer-copy">© 2025 CnTSoft. BTL Recognized RBTO. All rights reserved.</div>
+    <div class="footer-copy"
+         data-ko="© 2025 CnTSoft. BTL 공인 RBTO. All rights reserved."
+         data-en="© 2025 CnTSoft. BTL Recognized RBTO. All rights reserved.">
+      © 2025 CnTSoft. BTL 공인 RBTO. All rights reserved.
+    </div>
     <div class="footer-links">
-      <a href="#">개인정보처리방침</a>
-      <a href="#">이용약관</a>
-      <a href="#contact">Contact</a>
+      <a href="#" data-ko="개인정보처리방침" data-en="Privacy Policy">개인정보처리방침</a>
+      <a href="#" data-ko="이용약관"         data-en="Terms of Use">이용약관</a>
+      <a href="#contact" data-ko="문의"      data-en="Contact">문의</a>
     </div>
   </footer>
+
+  <script>
+    // ── LANGUAGE ENGINE ─────────────────────────────────────────────
+    let currentLang = 'ko';
+
+    function setLang(lang) {
+      currentLang = lang;
+
+      // Toggle button UI
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+
+      // Update page title
+      document.title = lang === 'ko'
+        ? 'CnTSoft – BTL 공인 RBTO | BACnet 시험 전문기관'
+        : 'CnTSoft – BTL Recognized RBTO | BACnet Testing';
+
+      // Update text content for all tagged elements
+      document.querySelectorAll('[data-ko],[data-en]').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (val === null) return;
+        // Use innerHTML for elements that may contain tags like <em> or <br>
+        const tag = el.tagName.toUpperCase();
+        if (['H1','H2','H3','P','DIV','SPAN','A','BUTTON'].includes(tag)) {
+          el.innerHTML = val;
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      // Update input/textarea placeholders
+      document.querySelectorAll('[data-placeholder-ko],[data-placeholder-en]').forEach(el => {
+        const ph = el.getAttribute('data-placeholder-' + lang);
+        if (ph) el.placeholder = ph;
+      });
+
+      // Update URL param without page reload
+      const url = new URL(window.location.href);
+      if (lang === 'en') {
+        url.searchParams.set('lang', 'en');
+      } else {
+        url.searchParams.delete('lang');
+      }
+      history.replaceState(null, '', url.toString());
+
+      // Persist
+      try { localStorage.setItem('cntsoft_lang', lang); } catch(e) {}
+    }
+
+    // ── INIT: default = KO unless ?lang=en or saved preference ──────
+    (function init() {
+      let lang = 'ko';
+      try {
+        const param = new URLSearchParams(window.location.search).get('lang');
+        const saved = localStorage.getItem('cntsoft_lang');
+        if (param === 'en') lang = 'en';
+        else if (!param && saved === 'en') lang = 'en';
+      } catch(e) {}
+      if (lang === 'en') setLang('en');
+    })();
+  </script>
 
 </body>
 </html>
