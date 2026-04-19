@@ -823,29 +823,7 @@
       if (lang === 'en') setLang('en');
     })();
 
-    // ── VISITOR COUNTER (localStorage-based) ────────────────────
-    (function() {
-      const TODAY = new Date().toISOString().slice(0,10); // "YYYY-MM-DD"
-      let total = parseInt(localStorage.getItem('cnt_total') || '0');
-      let dailyDate = localStorage.getItem('cnt_daily_date') || '';
-      let daily = parseInt(localStorage.getItem('cnt_daily') || '0');
-
-      // New visitor this session?
-      if (!sessionStorage.getItem('cnt_visited')) {
-        sessionStorage.setItem('cnt_visited', '1');
-        total += 1;
-        if (dailyDate === TODAY) {
-          daily += 1;
-        } else {
-          daily = 1;
-          dailyDate = TODAY;
-        }
-        localStorage.setItem('cnt_total', total);
-        localStorage.setItem('cnt_daily', daily);
-        localStorage.setItem('cnt_daily_date', dailyDate);
-      }
-
-    // ── HAMBURGER MENU ───────────────────────────────────────────
+    // ── HAMBURGER MENU (전역 함수 - onclick에서 호출 가능) ────────
     function toggleMenu() {
       const menu = document.getElementById('mobile-menu');
       const btn  = document.getElementById('hamburger');
@@ -860,6 +838,7 @@
         document.body.style.overflow = 'hidden';
       }
     }
+
     function closeMenu() {
       const menu = document.getElementById('mobile-menu');
       const btn  = document.getElementById('hamburger');
@@ -868,13 +847,33 @@
       document.body.style.overflow = '';
     }
 
-      // Animated count-up
+    // ── VISITOR COUNTER (localStorage-based) ────────────────────
+    (function() {
+      const TODAY = new Date().toISOString().slice(0,10);
+      let total     = parseInt(localStorage.getItem('cnt_total')      || '0');
+      let dailyDate =           localStorage.getItem('cnt_daily_date') || '';
+      let daily     = parseInt(localStorage.getItem('cnt_daily')      || '0');
+
+      if (!sessionStorage.getItem('cnt_visited')) {
+        sessionStorage.setItem('cnt_visited', '1');
+        total += 1;
+        if (dailyDate === TODAY) {
+          daily += 1;
+        } else {
+          daily = 1;
+          dailyDate = TODAY;
+        }
+        localStorage.setItem('cnt_total',      total);
+        localStorage.setItem('cnt_daily',      daily);
+        localStorage.setItem('cnt_daily_date', dailyDate);
+      }
+
       function animateCount(el, target, duration) {
         const start = Date.now();
         const step = () => {
-          const elapsed = Date.now() - start;
+          const elapsed  = Date.now() - start;
           const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
+          const eased    = 1 - Math.pow(1 - progress, 3);
           el.textContent = Math.round(eased * target).toLocaleString();
           if (progress < 1) requestAnimationFrame(step);
         };
