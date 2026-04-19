@@ -276,11 +276,57 @@
     .footer-links a { font-size: .78rem; color: #fff; text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--accent); }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column; justify-content: center; gap: 5px;
+      width: 36px; height: 36px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; height: 2px; width: 24px;
+      background: #fff; border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* 모바일 드롭다운 메뉴 */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(5,8,15,.97);
+      backdrop-filter: blur(16px);
+      z-index: 98;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+      padding: 120px 32px 48px;
+      min-height: 100vh;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: #fff; text-decoration: none;
+      font-size: 1.6rem; font-weight: 700;
+      letter-spacing: .04em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-menu .mobile-lang {
+      display: flex; gap: 12px; margin-top: 8px;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
+      nav { padding: 10px 20px; }
       .nav-center { display: none; }
-      .hero { padding: 110px 24px 60px; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      /* 로고 모바일 크기 축소 */
+      .nav-logo-img img { height: 44px !important; }
+      .nav-logo-img { padding: 4px 8px !important; }
+      .hero { padding: 145px 24px 60px; }
       .hero-stats { gap: 24px; flex-wrap: wrap; }
       .container { padding: 0 24px; }
       .why-inner { grid-template-columns: 1fr; gap: 36px; }
@@ -342,8 +388,24 @@
         <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
       </div>
       <a href="#contact" class="nav-cta" data-ko="문의하기" data-en="Contact Us">문의하기</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services" onclick="closeMenu()" data-ko="서비스"   data-en="Services">서비스</a>
+    <a href="#why"      onclick="closeMenu()" data-ko="회사소개" data-en="About">회사소개</a>
+    <a href="#process"  onclick="closeMenu()" data-ko="시험절차" data-en="Process">시험절차</a>
+    <a href="#contact"  onclick="closeMenu()" data-ko="문의"     data-en="Contact">문의</a>
+    <div class="mobile-lang">
+      <button class="lang-btn active" id="btn-ko-m" onclick="setLang('ko')">KR</button>
+      <button class="lang-btn"        id="btn-en-m" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="btn-primary" onclick="closeMenu()" data-ko="문의하기" data-en="Contact Us">문의하기</a>
+  </div>
 
 
   <!-- VISITOR BAR -->
@@ -702,6 +764,10 @@
       // Toggle button UI
       document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
       document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      const bkom = document.getElementById('btn-ko-m');
+      const benm = document.getElementById('btn-en-m');
+      if (bkom) bkom.classList.toggle('active', lang === 'ko');
+      if (benm) benm.classList.toggle('active', lang === 'en');
       document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
 
       // Update page title
@@ -774,6 +840,20 @@
         localStorage.setItem('cnt_daily', daily);
         localStorage.setItem('cnt_daily_date', dailyDate);
       }
+
+    // ── HAMBURGER MENU ───────────────────────────────────────────
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn  = document.getElementById('hamburger');
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
       // Animated count-up
       function animateCount(el, target, duration) {
